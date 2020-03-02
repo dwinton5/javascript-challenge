@@ -27,7 +27,7 @@ tableData.forEach(function(ufoSighting) {
 // Select the button
 var submit = d3.select("#filter-btn");
 
-//Click event of datetime filter
+//Click filter to select datetime
 submit.on("click", function() {
 
 // Remove existing table
@@ -36,11 +36,11 @@ d3.select("tbody").html("");
 // Prevent the page from refreshing
 d3.event.preventDefault();
 
-// Get the value property of the input element
+// Get the value property of the date entered
 var dateEntered = d3.select("#datetime").property("value");
 console.log(dateEntered);
 
-// Filter reports
+// Filter reports according to the date entered
 var filteredData = tableData.filter(record => record.datetime === dateEntered);
 console.log(filteredData);
 
