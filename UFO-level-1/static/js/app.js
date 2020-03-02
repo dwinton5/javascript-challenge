@@ -8,7 +8,7 @@ console.log(tableData);
 var tbody = d3.select("tbody");
 
 // UFO Sighting values for each column
-// Following App fashioned from code created by deepenrp @https://github.com/deepenrp/javascript-challenge/blob/master/UFO-level-1/static/js/app.js
+// Following App fashioned from code created by drreenaagrawal @https://github.com/drreenaagrawal/javascript-challenge/blob/master/UFO-level-1/static/js/app1.js
 tableData.forEach(function(ufoSighting) {
     console.log(ufoSighting);
     // Append one table row `tr` for each UFO Sighting object
@@ -25,34 +25,34 @@ tableData.forEach(function(ufoSighting) {
 
 
 // Select the button
-var button = d3.select("#filter-btn");
-button.on("click", function() {
+var submit = d3.select("#filter-btn");
 
-    tbody.html("");
+//Click event of datetime filter
+submit.on("click", function() {
 
-    // Enter date for filtered search result
-    var dateEntered = d3.select("#input");
-    // Get the table values associated with the date entered
-    var dateValue = dateEntered.d3.property("value");
-    // console.log input value
-    // console.log(dateValue);
-    // Filter Data with datetime equal to value entered
-    var filterResult = tableData.filter(sighting => sighting.datetime === dateValue);
-    // console.log filter values
-    console.log(filterResult);
+// Remove existing table
+d3.select("tbody").html("");
 
+// Prevent the page from refreshing
+d3.event.preventDefault();
 
-    filterResult.forEach(function(selection) {
+// Get the value property of the input element
+var dateEntered = d3.select("#datetime").property("value");
+console.log(dateEntered);
 
-    console.log(selection);
-    // Append one table row `tr` for each UFO Sighting object
-    var row = tbody.append("tr");
-    // Use `Object.entries` to console.log each UFO Sighting value
-    Object.entries(selection).forEach(function([key, value]) {
+// Filter reports
+var filteredData = tableData.filter(record => record.datetime === dateEntered);
+console.log(filteredData);
+
+// Display the filtered dataset
+filteredData.forEach((report) => {
+    var row = tbody.append('tr');
+
+    Object.entries(report).forEach(([key, value]) => {
         console.log(key, value);
-        // Append a cell to the row for each value
-        var cell = row.append("td");
+        var cell = row.append('td');
         cell.text(value);
     });
 });
+
 });
